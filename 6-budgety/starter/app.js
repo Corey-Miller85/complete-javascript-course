@@ -151,7 +151,7 @@ var UIController = (function () {
 		percentageLabel: ".budget__expenses--percentage",
 		container: ".container",
 		expensesPercLabel: ".item__percentage",
-		dateLabel: ".budget__title--month"
+		dateLabel: ".budget__title--month",
 	};
 
 	var formatNumber = function (num, type) {
@@ -175,7 +175,9 @@ var UIController = (function () {
 		}
 		dec = numSplit[1];
 
-		return (type === "exp" ? (sign = "-") : (sign = "+")) + " " + int + "." + dec;
+		return (
+			(type === "exp" ? (sign = "-") : (sign = "+")) + " " + int + "." + dec
+		);
 	};
 
 	return {
@@ -244,12 +246,19 @@ var UIController = (function () {
 		},
 		displayBudget: function (obj) {
 			var type;
-			obj.budget > 0 ? type = 'inc' : type = 'exp'
+			obj.budget > 0 ? (type = "inc") : (type = "exp");
 
-			document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
-			document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
-			document.querySelector(DOMstrings.expenseLabel).textContent =
-			formatNumber(obj.totalExp, 'exp');
+			document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(
+				obj.budget,
+				type
+			);
+			document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(
+				obj.totalInc,
+				"inc"
+			);
+			document.querySelector(
+				DOMstrings.expenseLabel
+			).textContent = formatNumber(obj.totalExp, "exp");
 
 			if (obj.percentage > 0) {
 				document.querySelector(
@@ -277,17 +286,30 @@ var UIController = (function () {
 			});
 		},
 
-		displayMonth: function() {
+		displayMonth: function () {
 			var now, year, month, months;
 			now = new Date();
 			// var christmas = new Date(2016, 11, 25);
-			months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+			months = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December",
+			];
 			month = now.getMonth();
 
 			year = now.getFullYear();
 
-			document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
-
+			document.querySelector(DOMstrings.dateLabel).textContent =
+				months[month] + " " + year;
 		},
 
 		getDOMstrings: function () {
